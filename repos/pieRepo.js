@@ -1,6 +1,6 @@
 let fs = require('fs'); // fs is built in node module that know how to work with reading and writing files
 
-const FILE_NAME = './assets/pies.json';
+const FILE_NAME = './assets/pies2.json';
 
 let pieRepo = {
     get: function (resolve, reject) {
