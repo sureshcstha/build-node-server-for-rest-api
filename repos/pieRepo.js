@@ -13,7 +13,7 @@ let pieRepo = {
           }
         });
     },
-    // get a single piece of data
+    // method to get a single piece of data
     getById: function (id, resolve, reject) {
         fs.readFile(FILE_NAME, function (err, data) {
           if (err) {
@@ -25,6 +25,30 @@ let pieRepo = {
           }
         });
     },
+    // search method
+    search: function (searchObject, resolve, reject) {
+        fs.readFile(FILE_NAME, function (err, data) {
+          if (err) {
+            reject(err);
+          }
+          else {
+            let pies = JSON.parse(data);
+            // Perform search
+            if (searchObject) {
+                // Example search object
+                // let searchObject = {
+                // "id": 1
+                //  "name": 'A"
+                // };
+              pies = pies.filter(
+                p => (searchObject.id ? p.id == searchObject.id : true) &&
+                  (searchObject.name ? p.name.toLowerCase().indexOf(searchObject.name) >= 0 : true)); // case insensitive search
+            }
+    
+            resolve(pies);
+          }
+        });
+    }
 };
   
 module.exports = pieRepo;

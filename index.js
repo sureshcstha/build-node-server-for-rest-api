@@ -20,6 +20,28 @@ router.get('/', function (req, res, next) {
     });
 });
 
+
+// Create GET/search?id=n&name=str to search for pies by 'id' and/or 'name'
+// for example: http://localhost:5000/api/search?id=1&name=a
+router.get('/search', function (req, res, next) {
+    let searchObject = {
+      "id": req.query.id,
+      "name": req.query.name
+    };
+  
+    pieRepo.search(searchObject, function (data) {
+      res.status(200).json({
+        "status": 200,
+        "statusText": "OK",
+        "message": "All pies retrieved.",
+        "data": data
+      });
+    }, function (err) {
+      next(err);
+    });
+});
+
+
 // Create GET/id to return a single pie
 // for example: http://localhost:5000/api/1
 router.get('/:id', function (req, res, next) {
