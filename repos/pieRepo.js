@@ -13,6 +13,18 @@ let pieRepo = {
           }
         });
     },
+    // get a single piece of data
+    getById: function (id, resolve, reject) {
+        fs.readFile(FILE_NAME, function (err, data) {
+          if (err) {
+            reject(err);
+          }
+          else {
+            let pie = JSON.parse(data).find(p => p.id == id);
+            resolve(pie);
+          }
+        });
+    },
 };
   
 module.exports = pieRepo;
